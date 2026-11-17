@@ -329,27 +329,20 @@
       </div>
 
       <div>
-        <div class="trade-step-label">Step 1: Choose who to replace in this match</div>
+        <div class="trade-step-label" style="font-weight: 700; margin-bottom: 6px; font-size: 14px;">Choose who to replace in this match:</div>
         <div class="trade-selector-group" id="tradeTargetSelectorGroup">
           <!-- Dynamically populated buttons -->
         </div>
 
-        <div class="trade-step-label margin-top-2">
-          Step 2: Choose replacement player (swaps wait queue ticket)
-        </div>
-        <div class="trade-candidates-container" id="tradeCandidatesContainer">
-          <!-- Dynamically populated match candidate buttons -->
-        </div>
-
-        <div class="manual-trade-box">
-          <div class="manual-trade-label">
-            Or manually swap with anyone in roster:
+        <div class="manual-trade-box margin-top-3">
+          <div class="manual-trade-label" style="font-weight: 700; margin-bottom: 6px; font-size: 14px;">
+            Swap with anyone in roster:
           </div>
-          <div class="input-row">
-            <select id="tradeManualSelect" class="select-dropdown flex-1" aria-label="Select player from roster">
+          <div class="input-row" style="display: flex; gap: 8px; align-items: stretch;">
+            <select id="tradeManualSelect" class="select-dropdown flex-1" aria-label="Select participant from roster" style="min-height: 44px; font-size: 15px;">
               <!-- Dynamically populated -->
             </select>
-            <button type="button" class="btn btn-primary" id="btnExecuteManualTrade">
+            <button type="button" class="btn btn-primary" id="btnExecuteManualTrade" style="min-height: 44px; padding: 0 16px; font-weight: 700; font-size: 14.5px; white-space: nowrap;">
               Swap Ticket
             </button>
           </div>
