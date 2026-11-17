@@ -1,22 +1,3 @@
-﻿/* =========================================================================
-   SpinRobin - Table 1 Table Tennis Endless Court System
-   Infinite "Longest-Wait-First" Queue & All-Time Live Leaderboard
-   =========================================================================
-   TABLE OF CONTENTS:
-   1. STATE & CONSTANTS
-   2. STORAGE (LOAD & SAVE)
-   3. SCHEDULER (INFINITE LONGEST-WAIT-FIRST & QUEUE SYNC)
-   4. RENDER (MATCHUPS, STANDINGS, CROSSTABLE, FAIRNESS, ROSTER)
-   5. EVENTS & MODALS
-   6. INIT & STARTUP
-   ========================================================================= */
-
-/**
-     * =========================================================================
-     * SpinRobin - Table 1 Table Tennis Endless Court System
-     * Infinite "Longest-Wait-First" Queue & All-Time Live Leaderboard
-     * =========================================================================
-     */
 
     const STORAGE_KEY = "spinrobin_fair_v6";
 
@@ -2327,52 +2308,6 @@
         leftPane.appendChild(deckCard);
       }
 
-      // Section 3: COMPLETED MATCHES (COLLAPSIBLE ACCORDION)
-      if (completedMatches.length > 0) {
-        const compSec = document.createElement("div");
-        compSec.className = "completed-section court-queue-section";
-
-        compSec.innerHTML = `
-          <details class="completed-details" ${pendingMatches.length === 0 ? 'open' : ''}>
-            <summary class="completed-summary">
-              <span>✅ Done (${completedMatches.length})</span>
-              <span class="font-xs text-muted">Toggle</span>
-            </summary>
-            <div class="completed-list" id="completedMatchesList">
-              <!-- Dynamically populated rows -->
-            </div>
-          </details>
-        `;
-
-        const compList = compSec.querySelector("#completedMatchesList");
-
-        completedMatches.forEach(m => {
-          const p1 = getEntry(m.p1Id);
-          const p2 = getEntry(m.p2Id);
-          if (!p1 || !p2) return;
-
-          const isP1Win = m.winnerId === p1.id;
-          const isP2Win = m.winnerId === p2.id;
-
-          const card = document.createElement("div");
-          card.className = "completed-slim-row completed-card";
-
-          card.innerHTML = `
-            <div class="completed-info">
-              <span class="completed-name ${isP1Win ? 'text-win' : 'text-muted'}">${escapeHtml(p1.name)}</span>
-              <span class="completed-score font-bold">${m.score1}–${m.score2}</span>
-              <span class="completed-name ${isP2Win ? 'text-win' : 'text-muted'}">${escapeHtml(p2.name)}</span>
-              <span class="font-xs text-muted">· Match #${m.matchNum}</span>
-            </div>
-            <button type="button" class="clear-score-link" data-id="${m.id}" title="Clear result">Clear</button>
-          `;
-
-          card.querySelector(".clear-score-link").addEventListener("click", () => clearMatchScore(m.id));
-          compList.appendChild(card);
-        });
-
-        leftPane.appendChild(compSec);
-      }
 
       // Section 4: TABLE 1 UPCOMING QUEUE PREVIEW (RESPONSIVE GRID WITH DRAG-TO-REORDER)
       const queueSec = document.createElement("div");
