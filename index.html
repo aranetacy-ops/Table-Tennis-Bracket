@@ -115,7 +115,7 @@
       </div>
 
       <div class="stats-summary">
-        <div class="stat-pill">
+        <div class="stat-pill cursor-pointer" id="statRosterPill" role="button" tabindex="0" title="Tap to view Active Roster Receipt" aria-label="View Active Roster Receipt">
           <span id="statRosterTypeLabel">Players</span>
           <strong id="statPlayerCount">0</strong>
         </div>
@@ -134,12 +134,18 @@
     </div>
   </section>
 
-  <!-- LIVE ROSTER CHIPS BAR (FULL-WIDTH SCROLLABLE) -->
-  <section class="roster-bar">
-    <div class="roster-inner" id="rosterChipsContainer">
-      <span class="roster-title" id="rosterTitle">Active Roster:</span>
-      <!-- Dynamic Chips -->
+      <!-- LIVE ROSTER CARD BOX (TAP TO OPEN RECEIPT) -->
+  <section class="roster-bar" id="rosterBarSection">
+    <div class="roster-box-card" id="btnOpenRosterReceipt" role="button" tabindex="0" aria-label="Open Active Players Roster" title="Click to view and manage active players">
+      <div class="roster-box-header-row">
+        <span class="roster-box-icon" aria-hidden="true">👥</span>
+        <span class="roster-box-title" id="rosterBoxTitle">Active Roster</span>
+        <span class="roster-box-badge badge-success" id="rosterBoxBadge">0 Active</span>
+      </div>
+      <div class="roster-box-preview" id="rosterBoxPreview">No players registered yet</div>
     </div>
+    <!-- Hidden compatibility container -->
+    <div id="rosterChipsContainer" style="display: none;"><span id="rosterTitle" style="display: none;"></span></div>
   </section>
 
   <!-- MAIN CONTENT CONTAINER (FULL-WIDTH) -->
@@ -357,6 +363,66 @@
 
   <!-- ACCESSIBILITY LIVE REGION -->
   <div id="a11yLiveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ROSTER RECEIPT MODAL (PAPER RECEIPT POPUP) -->
+  <div class="modal-backdrop roster-receipt-backdrop" id="rosterReceiptModal" role="dialog" aria-modal="true" aria-labelledby="receiptModalTitle" style="display: none;">
+    <div class="receipt-paper">
+      <!-- Top receipt tear edge -->
+      <div class="receipt-edge-top" aria-hidden="true"></div>
+
+            <!-- Accessible Title (Hidden) -->
+      <h3 id="receiptModalTitle" style="display: none;">Active Roster Receipt</h3>
+      <span id="receiptCategoryLabel" style="display: none;"></span>
+      <span id="receiptTimestamp" style="display: none;"></span>
+      <span id="receiptSerial" style="display: none;"></span>
+
+      <!-- Summary KPI Block -->
+      <div class="receipt-summary-block">
+        <div class="receipt-stat">
+          <span class="receipt-stat-num" id="receiptCountTotal">0</span>
+          <span class="receipt-stat-lbl">TOTAL</span>
+        </div>
+        <div class="receipt-stat">
+          <span class="receipt-stat-num text-success" id="receiptCountActive">0</span>
+          <span class="receipt-stat-lbl">ACTIVE</span>
+        </div>
+        <div class="receipt-stat">
+          <span class="receipt-stat-num text-warning" id="receiptCountResting">0</span>
+          <span class="receipt-stat-lbl">RESTING</span>
+        </div>
+      </div>
+
+      <div class="receipt-divider dashed"></div>
+
+      <div class="receipt-hint-text">
+        <span>Hold ⠿ to drag reorder &bull; Tap status to rest or activate</span>
+      </div>
+
+      <!-- Receipt Players List -->
+      <div class="receipt-items-container" id="receiptItemsList">
+        <!-- Dynamically populated receipt rows -->
+      </div>
+
+      <!-- Receipt Footer -->
+      <div class="receipt-footer">
+        <div class="receipt-divider dashed"></div>
+        <div class="receipt-barcode-wrap">
+          <div class="receipt-barcode" aria-hidden="true">||| | |||| | ||| || |||| | ||| || | |||</div>
+          <div class="receipt-barcode-num">LONGEST-WAIT-FIRST &bull; FAIR PLAY QUEUE</div>
+        </div>
+        <div class="receipt-sub-message">THANK YOU FOR PLAYING FAIR!</div>
+        <div class="receipt-divider solid"></div>
+        <div class="receipt-actions-bottom">
+          <button type="button" class="btn btn-primary btn-block" id="btnCloseReceiptModal" style="min-height: 48px; font-size: 16px; font-weight: 700; width: 100%;">
+            ✓ Done
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom receipt tear edge -->
+      <div class="receipt-edge-bottom" aria-hidden="true"></div>
+    </div>
+  </div>
 
   <!-- CONFIRM DESTRUCTIVE ACTION MODAL -->
   <div class="modal-backdrop" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmModalTitle">
